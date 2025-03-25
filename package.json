@@ -1,0 +1,11 @@
+{
+  "name": "com.greedygrung.greedylogger",
+  "version": "0.0.1",
+  "displayName": "Greedy Logger",
+  "description": "An ultimate logger!",
+  "author": {
+    "name": "Denis Litvinets",
+    "email": "denis.litvinets@gmail.com"
+  }
+}
+

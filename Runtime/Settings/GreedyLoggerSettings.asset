@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6617586ab481ce44a4c25fb87ad3792, type: 3}
+  m_Name: GreedyLoggerSettings
+  m_EditorClassIdentifier: 
+  _loggingEnabled: 1
+  _writeLogsToFiles: 1
+  _maxFilesCount: 10
+  _contexts:
+  - Gameplay
+  - Meta
+  - UI
+  _logLevels:
+  - Name: Default
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Emphasis: 0
+    Type: 3
+  - Name: Warning
+    Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    Emphasis: 0
+    Type: 2
+  - Name: Error
+    Color: {r: 1, g: 0, b: 0, a: 1}
+    Emphasis: 0
+    Type: 0
