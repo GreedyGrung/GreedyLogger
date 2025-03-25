@@ -15,13 +15,7 @@ namespace GreedyLogger.Settings
         [SerializeField] private List<string> _contexts;
 
         [Tooltip("Do not forget to press 'Generate' button below to apply changes!")]
-        [SerializeField]
-        List<LoggingLevelSettings> _logLevels = new()
-        {
-            new() { Name = "Default", Color = Color.white, Emphasis = LogEmphasis.None, Type = LogType.Log },
-            new() { Name = "Warning", Color = Color.yellow, Emphasis = LogEmphasis.None, Type = LogType.Warning },
-            new() { Name = "Error", Color = Color.red, Emphasis = LogEmphasis.None, Type = LogType.Error }
-        };
+        [SerializeField] private List<LoggingLevelSettings> _logLevels = GetDefaults();
 
         public bool LoggingEnabled => _loggingEnabled;
         public bool WriteLogsToFiles => _writeLogsToFiles;
@@ -29,15 +23,7 @@ namespace GreedyLogger.Settings
         public IReadOnlyList<string> Contexts => _contexts;
         public IReadOnlyList<LoggingLevelSettings> LogLevels => _logLevels;
 
-        public void RestoreToDefaults()
-        {
-            _logLevels = new()
-            {
-                new() { Name = "Default", Color = Color.white, Emphasis = LogEmphasis.None, Type = LogType.Log },
-                new() { Name = "Warning", Color = Color.yellow, Emphasis = LogEmphasis.None, Type = LogType.Warning },
-                new() { Name = "Error", Color = Color.red, Emphasis = LogEmphasis.None, Type = LogType.Error }
-            };
-        }
+        public void RestoreToDefaults() => _logLevels = GetDefaults();
 
         public bool CanBeGenerated() 
             => _logLevels.Any(item => item.Name == "Default") 
@@ -51,6 +37,16 @@ namespace GreedyLogger.Settings
 
                 _logLevels.Add(new() { Name = "Default", Color = Color.white, Emphasis = LogEmphasis.None, Type = LogType.Log });
             }
+        }
+
+        private static List<LoggingLevelSettings> GetDefaults()
+        {
+            return new()
+            {
+                new() { Name = "Default", Color = Color.white, Emphasis = LogEmphasis.None, Type = LogType.Log },
+                new() { Name = "Warning", Color = Color.yellow, Emphasis = LogEmphasis.None, Type = LogType.Warning },
+                new() { Name = "Error", Color = Color.red, Emphasis = LogEmphasis.None, Type = LogType.Error }
+            };
         }
     }
 }

@@ -53,7 +53,6 @@ namespace GreedyLogger
                 case LogType.Exception:
                     Debug.LogError(message);
                     break;
-
             }
         }
 

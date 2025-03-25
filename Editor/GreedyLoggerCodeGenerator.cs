@@ -21,9 +21,11 @@ namespace GreedyLogger.Editor
             Debug.Log("Generation process for GreedyLogger started...");
 
             LoggingSettings settings = AssetDatabase.LoadAssetAtPath<LoggingSettings>(Utils.FindAssetPath(Constants.SettingsAssetFilter));
+
             if (settings == null)
             {
                 Debug.LogError($"Failed to load LoggingSettings asset at {Utils.FindAssetPath(Constants.SettingsAssetFilter)}");
+
                 return;
             }
 
@@ -48,6 +50,7 @@ namespace GreedyLogger.Editor
             File.WriteAllText(logContextFile, contextCode);
 
             AssetDatabase.Refresh();
+
             Debug.Log("Generation process completed successfully!");
         }
 
@@ -144,6 +147,7 @@ namespace GreedyLogger.Editor
             {
                 sb.Append(Indent);
             }
+
             sb.AppendLine(line);
         }
     }

@@ -3,6 +3,7 @@ using GreedyLogger.Settings;
 
 namespace GreedyLogger
 {
+    [DisallowMultipleComponent]
     public class GreedyLoggerInitializer : MonoBehaviour
     {
         [SerializeField] private LoggingSettings _settings;
