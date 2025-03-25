@@ -9,11 +9,12 @@ namespace GreedyLogger.Editor
         [MenuItem("Tools/GreedyLogger/Instantiate GreedyLoggerInitializer")]
         public static void InstantiateGreedyLoggerInitializer()
         {
-            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(Utils.FindAssetPath(Constants.InitializerPrefabFilter));
+            string initializerPath = Utils.FindAssetPath(Constants.InitializerPrefabFilter);
+            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(initializerPath);
 
             if (prefab == null)
             {
-                Debug.LogError($"GreedyLoggerInitializer prefab not found at path: {Utils.FindAssetPath(Constants.InitializerPrefabFilter)}");
+                Debug.LogError($"GreedyLoggerInitializer prefab not found at path: {initializerPath}");
 
                 return;
             }
@@ -34,11 +35,12 @@ namespace GreedyLogger.Editor
         [MenuItem("Tools/GreedyLogger/Open Settings")]
         public static void OpenGreedyLoggerSettings()
         {
-            LoggingSettings settings = AssetDatabase.LoadAssetAtPath<LoggingSettings>(Utils.FindAssetPath(Constants.SettingsAssetFilter));
+            string settingsPath = Utils.FindAssetPath(Constants.SettingsAssetFilter);
+            LoggingSettings settings = AssetDatabase.LoadAssetAtPath<LoggingSettings>(settingsPath);
 
             if (settings == null)
             {
-                Debug.LogError($"GreedyLoggerSettings asset not found at path: {Utils.FindAssetPath(Constants.SettingsAssetFilter)}");
+                Debug.LogError($"GreedyLoggerSettings asset not found at path: {settingsPath}");
 
                 return;
             }
