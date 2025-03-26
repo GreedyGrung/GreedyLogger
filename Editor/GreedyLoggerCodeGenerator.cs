@@ -3,6 +3,8 @@ using System.IO;
 using GreedyLogger.Settings;
 using UnityEditor;
 using System.Text;
+using log4net.Core;
+using System.Reflection;
 
 namespace GreedyLogger.Editor
 {
@@ -83,6 +85,17 @@ namespace GreedyLogger.Editor
                 AppendIndentedLine(sb, baseIndent + 3, $"TryLog(message, LogImportance.{level.Name}, context);");
                 AppendIndentedLine(sb, baseIndent + 2, "}");
                 sb.AppendLine();
+            }
+
+            if (settings.LogExceptions)
+            {
+                AppendIndentedLine(sb, baseIndent + 2, "/// <summary>");
+                AppendIndentedLine(sb, baseIndent + 2, "/// Logs an exception.");
+                AppendIndentedLine(sb, baseIndent + 2, "/// </summary>");
+                AppendIndentedLine(sb, baseIndent + 2, $"public static void LogException(System.Exception exception)");
+                AppendIndentedLine(sb, baseIndent + 2, "{");
+                AppendIndentedLine(sb, baseIndent + 3, $"TryLogException(exception);");
+                AppendIndentedLine(sb, baseIndent + 2, "}");
             }
 
             AppendIndentedLine(sb, baseIndent + 1, "}");

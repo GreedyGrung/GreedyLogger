@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using GreedyLogger.Settings;
 using System.Linq;
+using System;
 
 namespace GreedyLogger
 {
@@ -34,26 +35,30 @@ namespace GreedyLogger
 
             switch (levelSettings.Type)
             {
-                case LogType.Log:
+                case Settings.LogType.Log:
                     Debug.Log(message); 
                     break;
 
-                case LogType.Warning:
+                case Settings.LogType.Warning:
                     Debug.LogWarning(message);
                     break;
 
-                case LogType.Error:
+                case Settings.LogType.Error:
                     Debug.LogError(message);
                     break;
 
-                case LogType.Assert:
+                case Settings.LogType.Assert:
                     Debug.LogAssertion(message);
                     break;
-
-                case LogType.Exception:
-                    Debug.LogError(message);
-                    break;
             }
+        }
+
+        private static void TryLogException(Exception exception)
+        {
+            if (_settings == null || !_settings.LoggingEnabled)
+                return;
+
+            Debug.LogException(exception);
         }
 
         private static string GetEmphasizedMessage(LogEmphasis logEmphasis, string message)

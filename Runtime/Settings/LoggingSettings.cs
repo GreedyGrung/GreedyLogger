@@ -17,11 +17,16 @@ namespace GreedyLogger.Settings
         [Tooltip("Do not forget to press 'Generate' button below to apply changes!")]
         [SerializeField] private List<LoggingLevelSettings> _logLevels = GetDefaults();
 
+
+        [Tooltip("Do not forget to press 'Generate' button below to apply changes!")]
+        [SerializeField] private bool _logExceptions;
+
         public bool LoggingEnabled => _loggingEnabled;
         public bool WriteLogsToFiles => _writeLogsToFiles;
         public int MaxFilesCount => _maxFilesCount;
         public IReadOnlyList<string> Contexts => _contexts;
         public IReadOnlyList<LoggingLevelSettings> LogLevels => _logLevels;
+        public bool LogExceptions => _logExceptions;
 
         public void RestoreToDefaults() => _logLevels = GetDefaults();
 

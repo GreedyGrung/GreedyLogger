@@ -9,7 +9,7 @@ namespace GreedyLogger.Editor
     {
         public override void OnInspectorGUI()
         {
-           DrawDefaultInspector();
+            DrawDefaultInspector();
 
             EditorGUILayout.Space();
 

@@ -29,5 +29,12 @@ namespace GreedyLogger
             TryLog(message, LogImportance.Error, context);
         }
 
+        /// <summary>
+        /// Logs an exception.
+        /// </summary>
+        public static void LogException(System.Exception exception)
+        {
+            TryLogException(exception);
+        }
     }
 }
