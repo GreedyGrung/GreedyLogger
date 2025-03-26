@@ -15,10 +15,11 @@ MonoBehaviour:
   _loggingEnabled: 1
   _writeLogsToFiles: 1
   _maxFilesCount: 10
+  _logFileDirectory: 
   _contexts:
   - Gameplay
-  - Meta
   - UI
+  - Meta
   - Infrastructure
   _contextsFilter: 31
   _logLevels:

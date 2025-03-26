@@ -11,6 +11,7 @@ namespace GreedyLogger.Settings
         [SerializeField] private bool _loggingEnabled;
         [SerializeField] private bool _writeLogsToFiles;
         [SerializeField] private int _maxFilesCount;
+        [SerializeField] private string _logFileDirectory;
 
         [Tooltip("Do not forget to press 'Generate' button below to apply changes!")]
         [SerializeField] private List<string> _contexts;
@@ -26,6 +27,7 @@ namespace GreedyLogger.Settings
         public bool LoggingEnabled => _loggingEnabled;
         public bool WriteLogsToFiles => _writeLogsToFiles;
         public int MaxFilesCount => _maxFilesCount;
+        public string LogFileDirectory => _logFileDirectory;
         public IReadOnlyList<string> Contexts => _contexts;
         public LogContext ContextsFilter => _contextsFilter;
         public IReadOnlyList<LoggingLevelSettings> LogLevels => _logLevels;

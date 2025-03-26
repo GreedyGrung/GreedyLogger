@@ -13,10 +13,12 @@ namespace GreedyLogger
         {
             _settings = settings;
 
+            FileLogger.Initialize(settings);
+
             TryLog("GreedyLogger successfully initialized!");
         }
 
-        private static void TryLog(string message, LogImportance logImportance = LogImportance.Default, LogContext context = LogContext.None)
+        internal static void TryLog(string message, LogImportance logImportance = LogImportance.Default, LogContext context = LogContext.None)
         {
             if (_settings == null || !_settings.LoggingEnabled || !_settings.ContextsFilter.HasFlag(context))
             {
