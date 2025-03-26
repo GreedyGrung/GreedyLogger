@@ -3,11 +3,13 @@
 // </auto-generated>
 namespace GreedyLogger
 {
+    [System.Flags]
     public enum LogContext
     {
-        None = 0,
-        Gameplay = 1,
-        Meta = 2,
-        UI = 3,
+        None = 1 << 0,
+        Gameplay = 1 << 1,
+        UI = 1 << 2,
+        Meta = 1 << 3,
+        Infrastructure = 1 << 4,
     }
 }

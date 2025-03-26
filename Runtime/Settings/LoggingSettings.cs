@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -14,9 +15,10 @@ namespace GreedyLogger.Settings
         [Tooltip("Do not forget to press 'Generate' button below to apply changes!")]
         [SerializeField] private List<string> _contexts;
 
+        [SerializeField] private LogContext _contextsFilter;
+
         [Tooltip("Do not forget to press 'Generate' button below to apply changes!")]
         [SerializeField] private List<LoggingLevelSettings> _logLevels = GetDefaults();
-
 
         [Tooltip("Do not forget to press 'Generate' button below to apply changes!")]
         [SerializeField] private bool _logExceptions;
@@ -25,10 +27,28 @@ namespace GreedyLogger.Settings
         public bool WriteLogsToFiles => _writeLogsToFiles;
         public int MaxFilesCount => _maxFilesCount;
         public IReadOnlyList<string> Contexts => _contexts;
+        public LogContext ContextsFilter => _contextsFilter;
         public IReadOnlyList<LoggingLevelSettings> LogLevels => _logLevels;
         public bool LogExceptions => _logExceptions;
 
-        public void RestoreToDefaults() => _logLevels = GetDefaults();
+        public void RestoreToDefaults()
+        {
+            _loggingEnabled = true;
+            _writeLogsToFiles = true;
+            _maxFilesCount = 10;
+
+            _contexts = new()
+            {
+                "Gameplay",
+                "UI",
+                "Meta",
+                "Infrastructure"
+            };
+
+            _contextsFilter = GetAllFlags<LogContext>();
+            _logLevels = GetDefaults();
+            _logExceptions = true;
+        }
 
         public bool CanBeGenerated() 
             => _logLevels.Any(item => item.Name == "Default") 
@@ -52,6 +72,18 @@ namespace GreedyLogger.Settings
                 new() { Name = "Warning", Color = Color.yellow, Emphasis = LogEmphasis.None, Type = LogType.Warning },
                 new() { Name = "Error", Color = Color.red, Emphasis = LogEmphasis.None, Type = LogType.Error }
             };
+        }
+
+        private TEnum GetAllFlags<TEnum>() where TEnum : Enum
+        {
+            TEnum result = (TEnum)Enum.Parse(typeof(TEnum), "0");
+
+            foreach (TEnum value in Enum.GetValues(typeof(TEnum)))
+            {
+                result = (TEnum)(object)(Convert.ToInt32(result) | Convert.ToInt32(value));
+            }
+
+            return result;
         }
     }
 }

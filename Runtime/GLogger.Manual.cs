@@ -18,8 +18,10 @@ namespace GreedyLogger
 
         private static void TryLog(string message, LogImportance logImportance = LogImportance.Default, LogContext context = LogContext.None)
         {
-            if (_settings == null || !_settings.LoggingEnabled)
+            if (_settings == null || !_settings.LoggingEnabled || !_settings.ContextsFilter.HasFlag(context))
+            {
                 return;
+            }
 
             LoggingLevelSettings levelSettings = _settings.LogLevels.First(c => c.Name == logImportance.ToString());
 
@@ -56,7 +58,9 @@ namespace GreedyLogger
         private static void TryLogException(Exception exception)
         {
             if (_settings == null || !_settings.LoggingEnabled)
+            {
                 return;
+            }
 
             Debug.LogException(exception);
         }

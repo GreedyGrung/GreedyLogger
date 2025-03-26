@@ -134,15 +134,16 @@ namespace GreedyLogger.Editor
             GenerateHeader(sb, baseIndent);
             AppendIndentedLine(sb, baseIndent, "namespace GreedyLogger");
             AppendIndentedLine(sb, baseIndent, "{");
+            AppendIndentedLine(sb, baseIndent + 1, "[System.Flags]");
             AppendIndentedLine(sb, baseIndent + 1, "public enum LogContext");
             AppendIndentedLine(sb, baseIndent + 1, "{");
-            AppendIndentedLine(sb, baseIndent + 2, "None = 0,");
+            AppendIndentedLine(sb, baseIndent + 2, "None = 1 << 0,");
 
             for (int i = 0; i < settings.Contexts.Count; i++)
             {
                 if (!string.IsNullOrEmpty(settings.Contexts[i]))
                 {
-                    AppendIndentedLine(sb, baseIndent + 2, $"{settings.Contexts[i]} = {i + 1},");
+                    AppendIndentedLine(sb, baseIndent + 2, $"{settings.Contexts[i]} = 1 << {i + 1},");
                 }
             }
 
