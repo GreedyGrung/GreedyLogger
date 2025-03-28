@@ -24,6 +24,11 @@ namespace GreedyLogger.Editor
                 GreedyLoggerCodeGenerator.Generate();
             }
 
+            if (GUILayout.Button("Reset Contexts Filter"))
+            {
+                ((LoggingSettings)target).ResetFilter();
+            }
+
             if (GUILayout.Button("Restore to Defaults"))
             {
                 ((LoggingSettings)target).RestoreToDefaults();

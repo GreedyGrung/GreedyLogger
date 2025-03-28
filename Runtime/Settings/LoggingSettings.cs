@@ -24,16 +24,16 @@ namespace GreedyLogger.Settings
         [Tooltip("Do not forget to press 'Generate' button below to apply changes!")]
         [SerializeField] private bool _logExceptions;
 
-        public bool LoggingEnabled => _loggingEnabled;
-        public bool WriteLogsToFiles => _writeLogsToFiles;
-        public int MaxFilesCount => _maxFilesCount;
-        public string LogFileDirectory => _logFileDirectory;
-        public IReadOnlyList<string> Contexts => _contexts;
-        public LogContext ContextsFilter => _contextsFilter;
-        public IReadOnlyList<LoggingLevelSettings> LogLevels => _logLevels;
-        public bool LogExceptions => _logExceptions;
+        internal bool LoggingEnabled => _loggingEnabled;
+        internal bool WriteLogsToFiles => _writeLogsToFiles;
+        internal int MaxFilesCount => _maxFilesCount;
+        internal string LogFileDirectory => _logFileDirectory;
+        internal IReadOnlyList<string> Contexts => _contexts;
+        internal LogContext ContextsFilter => _contextsFilter;
+        internal IReadOnlyList<LoggingLevelSettings> LogLevels => _logLevels;
+        internal bool LogExceptions => _logExceptions;
 
-        public void RestoreToDefaults()
+        internal void RestoreToDefaults()
         {
             _loggingEnabled = true;
             _writeLogsToFiles = true;
@@ -47,14 +47,16 @@ namespace GreedyLogger.Settings
                 "Infrastructure"
             };
 
-            _contextsFilter = GetAllFlags<LogContext>();
+            ResetFilter();
             _logLevels = GetDefaults();
             _logExceptions = true;
         }
 
-        public bool CanBeGenerated() 
+        internal bool CanBeGenerated() 
             => _logLevels.Any(item => item.Name == "Default") 
             && !_logLevels.Any(item => item.Name == "Exception");
+
+        internal void ResetFilter() => _contextsFilter = GetAllLogContexts();
 
         private void OnValidate()
         {
@@ -76,13 +78,13 @@ namespace GreedyLogger.Settings
             };
         }
 
-        private TEnum GetAllFlags<TEnum>() where TEnum : Enum
+        private LogContext GetAllLogContexts()
         {
-            TEnum result = (TEnum)Enum.Parse(typeof(TEnum), "0");
+            LogContext result = 0;
 
-            foreach (TEnum value in Enum.GetValues(typeof(TEnum)))
+            foreach (LogContext ctx in Enum.GetValues(typeof(LogContext)))
             {
-                result = (TEnum)(object)(Convert.ToInt32(result) | Convert.ToInt32(value));
+                result |= ctx;
             }
 
             return result;

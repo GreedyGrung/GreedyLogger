@@ -3,8 +3,6 @@ using System.IO;
 using GreedyLogger.Settings;
 using UnityEditor;
 using System.Text;
-using log4net.Core;
-using System.Reflection;
 
 namespace GreedyLogger.Editor
 {

@@ -1,0 +1,19 @@
+{
+    "name": "GreedyLogger.Tests",
+    "rootNamespace": "GreedyLogger",
+    "references": [
+        "GUID:dbdb68682836aa84cb6cba6eb5ef0140",
+        "GUID:9eea343e3baad8c4b90f74df9604ce27"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
