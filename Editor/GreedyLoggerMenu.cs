@@ -4,7 +4,7 @@ using UnityEditor;
 
 namespace GreedyLogger.Editor
 {
-    public static class GreedyLoggerMenu
+    internal static class GreedyLoggerMenu
     {
         [MenuItem("Tools/GreedyLogger/Instantiate GreedyLoggerInitializer")]
         public static void InstantiateGreedyLoggerInitializer()

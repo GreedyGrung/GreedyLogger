@@ -5,7 +5,7 @@ using UnityEditor;
 namespace GreedyLogger.Editor
 {
     [CustomEditor(typeof(LoggingSettings))]
-    public class GreedyLoggerSettingsEditor : UnityEditor.Editor
+    internal class GreedyLoggerSettingsEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
