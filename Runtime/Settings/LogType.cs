@@ -1,6 +1,6 @@
 ﻿namespace GreedyLogger.Settings
 {
-    public enum LogType
+    internal enum LogType
     {
         Log = 0,
         Warning = 1,
