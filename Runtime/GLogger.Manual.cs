@@ -27,13 +27,19 @@ namespace GreedyLogger
 
             LoggingLevelSettings levelSettings = _settings.LogLevels.First(c => c.Name == logImportance.ToString());
 
+            string hexColor = ColorUtility.ToHtmlStringRGBA(levelSettings.Color);
+
             if (context != LogContext.None)
             {
-                message = $"[{context}] {message}";
+                message = levelSettings.ColorizeContextOnly 
+                    ? $"<color=#{hexColor}>[{context}]</color> {message}" 
+                    : $"[{context}] {message}";
             }
 
-            string hexColor = ColorUtility.ToHtmlStringRGBA(levelSettings.Color);
-            message = $"<color=#{hexColor}>{message}</color>";
+            if (!levelSettings.ColorizeContextOnly)
+            {
+                message = $"<color=#{hexColor}>{message}</color>";
+            }
 
             message = GetEmphasizedMessage(levelSettings.Emphasis, message);
 

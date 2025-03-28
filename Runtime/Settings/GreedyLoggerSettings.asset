@@ -25,14 +25,17 @@ MonoBehaviour:
   _logLevels:
   - Name: Default
     Color: {r: 1, g: 1, b: 1, a: 1}
+    ColorizeContextOnly: 0
     Emphasis: 0
     Type: 0
   - Name: Warning
     Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    ColorizeContextOnly: 0
     Emphasis: 0
     Type: 1
   - Name: Error
     Color: {r: 1, g: 0, b: 0, a: 1}
+    ColorizeContextOnly: 0
     Emphasis: 0
     Type: 2
   _logExceptions: 1
