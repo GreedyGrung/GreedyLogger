@@ -20,7 +20,7 @@ namespace GreedyLogger.Tests
 
             LogEmphasis flags = LogEmphasis.Bold | LogEmphasis.Italic;
             string result = (string)getEmphMethod.Invoke(null, new object[] { flags, TestMessage });
-            Assert.AreEqual($"<i><b>{TestMessage}</b></i>", result);
+            Assert.AreEqual($"<b><i>{TestMessage}</i></b>", result);
         }
 
         [Test]
