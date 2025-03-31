@@ -13,8 +13,6 @@ namespace GreedyLogger
         {
             _settings = settings;
 
-            FileLogger.Initialize(settings);
-
             TryLog("GreedyLogger successfully initialized!");
         }
 

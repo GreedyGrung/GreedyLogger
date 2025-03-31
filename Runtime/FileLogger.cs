@@ -55,7 +55,6 @@ namespace GreedyLogger
             {
                 _writer = new StreamWriter(_logFilePath, false) { AutoFlush = true };
                 Application.logMessageReceived += HandleLog;
-                Application.quitting += Shutdown;
                 GLogger.TryLog("FileLogger initialized. Logging to: " + _logFilePath);
             }
             catch (Exception ex)
@@ -64,7 +63,23 @@ namespace GreedyLogger
             }
         }
 
-        internal static void HandleLog(string logString, string stackTrace, UnityEngine.LogType type)
+        internal static void Shutdown()
+        {
+            if (!_settings.WriteLogsToFiles)
+            {
+                return;
+            }
+
+            Application.logMessageReceived -= HandleLog;
+
+            if (_writer != null)
+            {
+                _writer.Close();
+                _writer = null;
+            }
+        }
+
+        private static void HandleLog(string logString, string stackTrace, UnityEngine.LogType type)
         {
             if (_writer == null)
             {
@@ -83,18 +98,6 @@ namespace GreedyLogger
             }
 
             _writer.WriteLine(logEntry);
-        }
-
-        private static void Shutdown()
-        {
-            Application.logMessageReceived -= HandleLog;
-            Application.quitting -= Shutdown;
-
-            if (_writer != null)
-            {
-                _writer.Close();
-                _writer = null;
-            }
         }
     }
 }
