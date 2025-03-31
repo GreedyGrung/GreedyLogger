@@ -36,7 +36,7 @@ namespace GreedyLogger.Settings
         internal void RestoreToDefaults()
         {
             _loggingEnabled = true;
-            _writeLogsToFiles = true;
+            _writeLogsToFiles = false;
             _maxFilesCount = 10;
 
             _contexts = new()
