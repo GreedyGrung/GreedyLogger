@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GreedyLoggerSettings
   m_EditorClassIdentifier: 
   _loggingEnabled: 1
-  _writeLogsToFiles: 1
+  _writeLogsToFiles: 0
   _maxFilesCount: 10
   _logFileDirectory: 
   _contexts:
