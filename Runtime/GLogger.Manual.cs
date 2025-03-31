@@ -80,7 +80,7 @@ namespace GreedyLogger
             string logImportanceString = logImportance.ToString();
             LoggingLevelSettings levelSettings = null;
 
-            for (int i = 0, count = _settings.LogLevels.Count; i < count; i++)
+            for (int i = 0; i < _settings.LogLevels.Count; i++)
             {
                 if (_settings.LogLevels[i].Name == logImportanceString)
                 {
