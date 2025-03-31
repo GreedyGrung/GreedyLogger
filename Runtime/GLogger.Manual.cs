@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using GreedyLogger.Settings;
-using System.Linq;
 using System;
+using System.Text;
 
 namespace GreedyLogger
 {
     public static partial class GLogger
     {
+        private static readonly StringBuilder _builder = new(256);
         private static LoggingSettings _settings;
 
         internal static void Initialize(LoggingSettings settings)
@@ -23,20 +24,33 @@ namespace GreedyLogger
                 return;
             }
 
-            LoggingLevelSettings levelSettings = _settings.LogLevels.First(c => c.Name == logImportance.ToString());
-
+            LoggingLevelSettings levelSettings = GetSettings(logImportance);
             string hexColor = ColorUtility.ToHtmlStringRGBA(levelSettings.Color);
+
+            _builder.Clear();
 
             if (context != LogContext.None)
             {
-                message = levelSettings.ColorizeContextOnly 
-                    ? $"<color=#{hexColor}>[{context}]</color> {message}" 
-                    : $"[{context}] {message}";
-            }
+                if (levelSettings.ColorizeContextOnly)
+                {
+                    _builder.Append("<color=#").Append(hexColor).Append(">[")
+                            .Append(context).Append("]</color> ");
+                }
+                else
+                {
+                    _builder.Append("[").Append(context).Append("] ");
+                }
 
+                _builder.Append(message);
+                message = _builder.ToString();
+            }
+            
             if (!levelSettings.ColorizeContextOnly)
             {
-                message = $"<color=#{hexColor}>{message}</color>";
+                _builder.Clear();
+                _builder.Append("<color=#").Append(hexColor).Append(">")
+                        .Append(message).Append("</color>");
+                message = _builder.ToString();
             }
 
             message = GetEmphasizedMessage(levelSettings.Emphasis, message);
@@ -44,7 +58,7 @@ namespace GreedyLogger
             switch (levelSettings.Type)
             {
                 case Settings.LogType.Log:
-                    Debug.Log(message); 
+                    Debug.Log(message);
                     break;
 
                 case Settings.LogType.Warning:
@@ -59,6 +73,25 @@ namespace GreedyLogger
                     Debug.LogAssertion(message);
                     break;
             }
+        }
+
+        private static LoggingLevelSettings GetSettings(LogImportance logImportance)
+        {
+            string logImportanceString = logImportance.ToString();
+            LoggingLevelSettings levelSettings = null;
+
+            for (int i = 0, count = _settings.LogLevels.Count; i < count; i++)
+            {
+                if (_settings.LogLevels[i].Name == logImportanceString)
+                {
+                    levelSettings = _settings.LogLevels[i];
+                    break;
+                }
+            }
+
+            levelSettings ??= _settings.LogLevels[0];
+
+            return levelSettings;
         }
 
         private static void TryLogException(Exception exception)
@@ -78,22 +111,19 @@ namespace GreedyLogger
                 return message;
             }
 
-            if (logEmphasis.HasFlag(LogEmphasis.Bold))
-            {
-                message = $"<b>{message}</b>";
-            }
+            _builder.Clear();
 
-            if (logEmphasis.HasFlag(LogEmphasis.Italic))
-            {
-                message = $"<i>{message}</i>";
-            }
+            if (logEmphasis.HasFlag(LogEmphasis.Bold)) _builder.Append("<b>");
+            if (logEmphasis.HasFlag(LogEmphasis.Italic)) _builder.Append("<i>");
+            if (logEmphasis.HasFlag(LogEmphasis.Underline)) _builder.Append("<u>");
 
-            if (logEmphasis.HasFlag(LogEmphasis.Underline))
-            {
-                message = $"<u>{message}</u>";
-            }
+            _builder.Append(message);
 
-            return message;
+            if (logEmphasis.HasFlag(LogEmphasis.Underline)) _builder.Append("</u>");
+            if (logEmphasis.HasFlag(LogEmphasis.Italic)) _builder.Append("</i>");
+            if (logEmphasis.HasFlag(LogEmphasis.Bold)) _builder.Append("</b>");
+
+            return _builder.ToString();
         }
     }
 }
