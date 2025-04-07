@@ -8,6 +8,8 @@ namespace GreedyLogger.Settings
     [CreateAssetMenu(fileName = "GreedyLoggerSettings", menuName = "Greedy Logger Settings")]
     public class LoggingSettings : ScriptableObject
     {
+        private static readonly Color DefaultLogColor = new(0.778f, 0.778f, 0.778f);
+
         [SerializeField] private bool _loggingEnabled;
         [SerializeField] private bool _writeLogsToFiles;
         [SerializeField] private int _maxFilesCount;
@@ -64,7 +66,7 @@ namespace GreedyLogger.Settings
             {
                 Debug.LogWarning("You must have at least 1 logging level!");
 
-                _logLevels.Add(new() { Name = "Default", Color = Color.white, Emphasis = LogEmphasis.None, Type = LogType.Log });
+                _logLevels.Add(new() { Name = "Default", Color = DefaultLogColor, Emphasis = LogEmphasis.None, Type = LogType.Log });
             }
         }
 
@@ -72,7 +74,7 @@ namespace GreedyLogger.Settings
         {
             return new()
             {
-                new() { Name = "Default", Color = Color.white, Emphasis = LogEmphasis.None, Type = LogType.Log },
+                new() { Name = "Default", Color = DefaultLogColor, Emphasis = LogEmphasis.None, Type = LogType.Log },
                 new() { Name = "Warning", Color = Color.yellow, Emphasis = LogEmphasis.None, Type = LogType.Warning },
                 new() { Name = "Error", Color = Color.red, Emphasis = LogEmphasis.None, Type = LogType.Error }
             };
