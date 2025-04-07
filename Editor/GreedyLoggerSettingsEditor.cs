@@ -29,7 +29,7 @@ namespace GreedyLogger.Editor
                 ((LoggingSettings)target).ResetFilter();
             }
 
-            if (GUILayout.Button("Restore to Defaults"))
+            if (GUILayout.Button("Reset To Default"))
             {
                 ((LoggingSettings)target).RestoreToDefaults();
             }
