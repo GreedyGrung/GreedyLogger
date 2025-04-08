@@ -17,7 +17,7 @@ Main features:
 - [Logging to files](#logging-to-files)
 
 ## Installation
-You can download latest unity package file from [Releases Page](https://github.com/GreedyGrung/GreedyLogger/releases)
+You can download latest unity package file from [Releases Page](https://github.com/GreedyGrung/GreedyLogger/releases). Import the package into your Unity project.
 
 ## Getting started
 Go to Tools menu and select 'GreedyLogger'->'Instantiate GreedyLoggerInitializer' to instantiate initializer in your current scene. This game object is required for GreedyLogger to work. Make sure you place this object into the **first** scene that will be opened in your game.
