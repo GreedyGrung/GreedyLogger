@@ -19,6 +19,8 @@ Main features:
 ## Installation
 You can download latest unity package file from [Releases Page](https://github.com/GreedyGrung/GreedyLogger/releases). Import the package into your Unity project.
 
+Required Unity version: **2021.3.0f1 and higher**.
+
 ## Getting started
 Go to Tools menu and select 'GreedyLogger'->'Instantiate GreedyLoggerInitializer' to instantiate initializer in your current scene. This game object is required for GreedyLogger to work. Make sure you place this object into the **first** scene that will be opened in your game.
 After that, you can go to settings asset by selecting 'Tools'->'GreedyLogger'->'Open Settings' in menu.
@@ -68,7 +70,9 @@ If you want to add a context to your log, you need to add it as a second paramet
 GLogger.Log("Hellow world!", LogContext.Gameplay)
 ```
 This message will look like this: 
-\[Gameplay\] Hello world!
+
+*\[Gameplay\] Hello world!*
+
 If you want to add a custom context, just open the settings asset, go to Contexts list and add a new context (for example, AI). To be able to use it from code just press 'Generate Code' button below. After that you can call any logging method with your new context:
 ```cs
 GLogger.Log("Hellow world!", LogContext.AI)
