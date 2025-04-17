@@ -71,7 +71,7 @@ GLogger.Log("Hellow world!", LogContext.Gameplay)
 ```
 This message will look like this: 
 
-*\[Gameplay\] Hello world!*
+\[Gameplay\] Hello world!
 
 If you want to add a custom context, just open the settings asset, go to Contexts list and add a new context (for example, AI). To be able to use it from code just press 'Generate Code' button below. After that you can call any logging method with your new context:
 ```cs
