@@ -38,6 +38,7 @@ Available settings:
     * Emphasis - here you can choose what style your log message will have. You can select **bold**, *italic* and <ins>underline</ins> style or <ins>***combine***</ins> them.
     * Type - you can choose whether your log message will have average *Log*, *Warning*, *Error* or *Assert* type.
 * **Log Exceptions** - check this box if you want to generate a method that will allow you to log exceptions (similar to the default Debug.LogException(Exception ex) method).
+
 Buttons:
 * **Generate Code** - press this button to generate contexts, importance levels and custom logging methods.
 * **Reset Contexts Filter** - resets contexts filter to default value. By default this filter passes all logs with or without context.
